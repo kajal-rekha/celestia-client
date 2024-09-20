@@ -25,7 +25,7 @@ const HistoryPanel = ({ isOpen }) => {
         <div
             className={`fixed right-0 transform top-0  ${
                 isOpen ? "translate-x-0" : "translate-x-full"
-            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0 md:w-64 md:flex md:flex-col pb-7 min-h-screen`}
+            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0 md:w-64 md:flex md:flex-col  min-h-screen`}
         >
             <div className="flex justify-between items-center ">
                 <h2 className="text-lg font-semibold  hidden md:block ">
@@ -51,7 +51,7 @@ const HistoryPanel = ({ isOpen }) => {
                         </p>
                     </li>
                 ))}
-                <button className="bg-gray-900  px-8 py-2 rounded-lg  mt-5 ml-5 flex gap-3 items-center mt-40">
+                <button className="bg-gray-900  px-8 py-3 rounded-lg  mt-5 ml-5 flex gap-3 items-center mt-40 text-sm ">
                     <Trash2 className="w-5 h-5 hover:text-red-500 duration-300" />
                     Clear history
                 </button>

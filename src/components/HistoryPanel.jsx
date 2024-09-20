@@ -23,9 +23,9 @@ const HistoryPanel = ({ isOpen }) => {
 
     return (
         <div
-            className={`fixed right-0 transform top-0 overflow-y-hidden ${
+            className={`fixed right-0 transform top-0  ${
                 isOpen ? "translate-x-0" : "translate-x-full"
-            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0 md:w-64 md:flex md:flex-col pb-7`}
+            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0 md:w-64 md:flex md:flex-col pb-7 min-h-screen`}
         >
             <div className="flex justify-between items-center ">
                 <h2 className="text-lg font-semibold  hidden md:block ">

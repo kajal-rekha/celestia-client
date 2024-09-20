@@ -1,0 +1,120 @@
+import React, { useState, useRef, useEffect } from "react";
+import { Send, Mic, PaperclipIcon } from "lucide-react";
+
+const ChatArea = () => {
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState("");
+    const messagesEndRef = useRef(null);
+    const inputRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(scrollToBottom, [messages]);
+
+    const handleSend = async () => {
+        if (!input.trim()) return;
+
+        const newMessages = [...messages, { role: "user", content: input }];
+        setMessages(newMessages);
+        setInput("");
+
+        try {
+            const response = await fetch("http://localhost:5000/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({ message: input })
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to get AI response");
+            }
+
+            const data = await response.json();
+            setMessages([
+                ...newMessages,
+                { role: "ai", content: data.response }
+            ]);
+        } catch (error) {
+            console.error("Error:", error);
+            setMessages([
+                ...newMessages,
+                {
+                    role: "ai",
+                    content:
+                        "Sorry, something went wrong while processing your request. Please try again later."
+                }
+            ]);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    };
+
+    return (
+        <div className="flex flex-col h-full bg-gray-900">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28 -mt-16 ">
+                {messages.map((message, i) => (
+                    <div
+                        key={i}
+                        className={`flex ${
+                            message.role === "user"
+                                ? "justify-end"
+                                : "justify-start"
+                        }`}
+                    >
+                        <div
+                            className={`max-w-[75%] p-3 rounded-lg ${
+                                message.role === "user"
+                                    ? "bg-indigo-600"
+                                    : "bg-gray-700"
+                            }`}
+                        >
+                            {message.content}
+                        </div>
+                    </div>
+                ))}
+                <div ref={messagesEndRef} />
+            </div>
+
+            <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 p-4 ">
+                <div className="max-w-3xl mx-auto relative">
+                    <div className="flex items-center bg-gray-700 rounded-lg shadow-xl">
+                        <button className="p-3 text-gray-400 hover:text-white transition-colors">
+                            <PaperclipIcon className="w-5 h-5" />
+                        </button>
+                        <textarea
+                            ref={inputRef}
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Type your message..."
+                            className="flex-1 bg-transparent border-none focus:ring-0 text-white placeholder-gray-400 p-3 max-h-32 h-full resize-none focus:outline-none"
+                            rows="1"
+                        />
+                        <button className="p-3 text-gray-400 hover:text-white transition-colors">
+                            <Mic className="w-6 h-6" />
+                        </button>
+                        <button
+                            onClick={handleSend}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-r-lg  transition-colors p-3 focus:outline-none"
+                            aria-label="Send message"
+                        >
+                            <Send className="w-6 h-6" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ChatArea;

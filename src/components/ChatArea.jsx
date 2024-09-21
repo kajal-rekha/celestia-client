@@ -31,7 +31,7 @@ const ChatArea = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Failed to get AI response");
+                throw new Error("Failed to get  response");
             }
 
             const data = await response.json();
@@ -60,7 +60,7 @@ const ChatArea = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-gray-900">
+        <div className="flex flex-col h-full bg-gray-900 ">
             <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-28 -mt-16 ">
                 {messages.map((message, i) => (
                     <div
@@ -88,9 +88,10 @@ const ChatArea = () => {
             <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 p-4 ">
                 <div className="max-w-3xl mx-auto relative">
                     <div className="flex items-center bg-gray-700 rounded-lg shadow-xl">
-                        <button className="p-3 text-gray-400 hover:text-white transition-colors">
+                        <button className="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer">
                             <PaperclipIcon className="w-5 h-5" />
                         </button>
+
                         <textarea
                             ref={inputRef}
                             value={input}

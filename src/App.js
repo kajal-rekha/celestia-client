@@ -10,8 +10,8 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
-    const [showSidebar, setShowSidebar] = useState(true); // Sidebar always shown
-    const [showHistory, setShowHistory] = useState(true); // History always shown
+    const [showSidebar, setShowSidebar] = useState(true); 
+    const [showHistory, setShowHistory] = useState(true); 
 
     const handleLogin = (username, password) => {
         console.log("Logging in with:", username, password);

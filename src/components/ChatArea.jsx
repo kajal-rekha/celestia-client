@@ -86,7 +86,7 @@ const ChatArea = () => {
             </div>
 
             <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 p-4 ">
-                <div className="max-w-3xl mx-auto relative">
+                <div className="max-w-2xl lg:max-w-xl xl:max-w-3xl  2xl:max-w-5xl mx-auto relative">
                     <div className="flex items-center bg-gray-700 rounded-lg shadow-xl">
                         <button className="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer">
                             <PaperclipIcon className="w-5 h-5" />

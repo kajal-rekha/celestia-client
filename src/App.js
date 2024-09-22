@@ -55,7 +55,7 @@ const App = () => {
                 </div>
 
                 {showHistory && (
-                    <div className="w-64 h-full bg-gray-800 hidden md:block">
+                    <div className="w-64 h-full bg-gray-800 hidden lg:block">
                         <HistoryPanel
                             className="fixed top-0 right-0 w-64 h-full bg-gray-800 z-20"
                             onClose={() => setShowHistory(false)}

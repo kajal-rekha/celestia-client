@@ -22,7 +22,7 @@ const Sidebar = ({
         <div
             className={`fixed inset-y-0 left-0 transform ${
                 isOpen ? "translate-x-0" : "-translate-x-full"
-            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0`}
+            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 lg:relative lg:translate-x-0`}
         >
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center mb-3">
@@ -32,7 +32,7 @@ const Sidebar = ({
                     <span className="text-xl font-bold">Quirkle</span>
                 </div>
 
-                <button onClick={onClose} className="md:hidden">
+                <button onClick={onClose} className="lg:hidden">
                     <X className="w-6 h-6" />
                 </button>
             </div>
@@ -41,7 +41,7 @@ const Sidebar = ({
                 <ul className="space-y-2">
                     <li className="bg-gray-700 rounded-lg">
                         <a
-                            href="#"
+                            href="/"
                             className="flex items-center p-2 text-indigo-400"
                         >
                             <MessageSquare className="w-5 h-5 mr-3" />
@@ -49,7 +49,7 @@ const Sidebar = ({
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2">
+                        <a href="/template" className="flex items-center p-2">
                             <FileCode2 className="w-5 h-5 mr-3" />
                             Templates
                             <span className="ml-auto text-xs bg-indigo-600 px-2 py-1 rounded">
@@ -58,7 +58,7 @@ const Sidebar = ({
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2">
+                        <a href="/statistics" className="flex items-center p-2">
                             <BarChart2 className="w-5 h-5 mr-3" />
                             Statistics
                             <span className="ml-auto text-xs bg-indigo-600 px-2 py-1 rounded">
@@ -67,19 +67,19 @@ const Sidebar = ({
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2">
+                        <a href="/settings" className="flex items-center p-2">
                             <Settings className="w-5 h-5 mr-3" />
                             Settings
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2">
+                        <a href="/notifications" className="flex items-center p-2">
                             <Bell className="w-5 h-5 mr-3" />
                             Noticications
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2">
+                        <a href="/faq" className="flex items-center p-2">
                             <HelpCircle className="w-5 h-5 mr-3" />
                             Updates & FAQ
                         </a>

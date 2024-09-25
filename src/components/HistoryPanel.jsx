@@ -20,8 +20,8 @@ const HistoryPanel = ({ isOpen }) => {
             description: "How does artificial intelligence work?"
         },
         {
-            title: "Onboarding",
-            description: "How does artificial intelligence work?"
+            title: "Javascript",
+            description: "What is JavaScript?"
         },
         
     ];
@@ -40,7 +40,7 @@ const HistoryPanel = ({ isOpen }) => {
                     6/50
                 </button>
             </div>
-            <ul className=" flex-1  mt-12">
+            <ul className=" flex-1  mt-10">
                 {historyItems.map((item, index) => (
                     <li
                         key={index}
@@ -56,7 +56,7 @@ const HistoryPanel = ({ isOpen }) => {
                         </p>
                     </li>
                 ))}
-                <button className="bg-gray-900  px-8 py-3 rounded-lg  mt-5 ml-5 flex gap-3 items-center text-sm ">
+                <button className="bg-gray-900  px-8 py-3 rounded-lg  mt-5 ml-2 flex gap-5 items-center  text-sm ">
                     <Trash2 className="w-5 h-5 hover:text-red-500 duration-300" />
                     Clear history
                 </button>

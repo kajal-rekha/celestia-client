@@ -1,4 +1,4 @@
-import { Menu, Clock, User, Sun, HelpCircle } from "lucide-react";
+import { Menu, Clock, User, Sun} from "lucide-react";
 
 const Header = ({ onMenuClick, onHistoryClick }) => {
     return (
@@ -16,10 +16,8 @@ const Header = ({ onMenuClick, onHistoryClick }) => {
                 <button className="text-gray-400 hover:text-white transition-colors" aria-label="Toggle theme">
                     <Sun className="w-6 h-6" />
                 </button>
-                <button className="text-gray-400 hover:text-white transition-colors hidden md:block" aria-label="Help">
-                    <HelpCircle className="w-6 h-6" />
-                </button>
-                <button onClick={onHistoryClick} className="lg:hidden text-gray-400 hover:text-white transition-colors" aria-label="View history">
+               
+                <button onClick={onHistoryClick} className=" text-gray-400 hover:text-white transition-colors" aria-label="View history">
                     <Clock className="w-6 h-6" />
                 </button>
             </div>

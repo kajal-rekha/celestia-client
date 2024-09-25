@@ -24,12 +24,12 @@ const Sidebar = ({
                 isOpen ? "translate-x-0" : "-translate-x-full"
             } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 lg:relative lg:translate-x-0`}
         >
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center mb-3">
-                    <div className="w-8 h-8 bg-indigo-600 rounded-lg mr-2 flex items-center justify-center">
+                    <a href="/" className="w-8 h-8 bg-indigo-600 rounded-lg mr-2 flex items-center justify-center">
                         <Sparkles className="w-5 h-5" />
-                    </div>
-                    <span className="text-xl font-bold">Quirkle</span>
+                    </a>
+                    <a href="/" className="text-xl font-bold">Quirkle</a>
                 </div>
 
                 <button onClick={onClose} className="lg:hidden">

@@ -15,39 +15,41 @@ const ChatArea = () => {
     useEffect(scrollToBottom, [messages]);
 
     const handleSend = async () => {
-        if (!input.trim()) return;
+    if (!input.trim()) return;
 
-        const newUserMessage = { role: "user", content: input };
-        setMessages((prevMessages) => [...prevMessages, newUserMessage]);
-        setInput("");
+    const newUserMessage = { role: "user", content: input };
+    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+    setInput("");
 
-        try {
-            const response = await fetch("http://localhost:5000/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                },
-                body: JSON.stringify({ message: input })
-            });
+    try {
+        const response = await fetch("http://localhost:5000/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({ message: input })
+        });
 
-            if (!response.ok) {
-                throw new Error("Failed to get AI response");
-            }
-
-            const data = await response.json();
-            const newAiMessage = { role: "ai", content: data.response };
-            setMessages((prevMessages) => [...prevMessages, newAiMessage]);
-        } catch (error) {
-            console.error("Error:", error);
-            const errorMessage = {
-                role: "ai",
-                content:
-                    "Sorry, something went wrong while processing your request. Please try again later."
-            };
-            setMessages((prevMessages) => [...prevMessages, errorMessage]);
+        if (!response.ok) {
+            throw new Error("Failed to get response");
         }
-    };
+
+        const data = await response.json();
+        const newAiMessage = { role: "ai", content: data.response };
+        setMessages((prevMessages) => [...prevMessages, newAiMessage]);
+    } catch (error) {
+        console.error("Error:", error);
+        const errorMessage = {
+            role: "ai",
+            content: "Sorry, something went wrong while processing your request. Please try again later."
+        };
+        setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    }
+};
+
+
+
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {

@@ -12,6 +12,7 @@ const App = () => {
     const [showSignup, setShowSignup] = useState(false);
     const [showSidebar, setShowSidebar] = useState(true); 
     const [showHistory, setShowHistory] = useState(true); 
+     
 
     const handleLogin = (username, password) => {
         console.log("Logging in with:", username, password);

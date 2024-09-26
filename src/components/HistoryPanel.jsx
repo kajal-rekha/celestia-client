@@ -1,67 +1,51 @@
+import React from "react";
 import { Trash2 } from "lucide-react";
 
-const HistoryPanel = ({ isOpen }) => {
-    const historyItems = [
-        {
-            title: "Create welcome form",
-            description: "Write code (HTML, CSS and JS) for a simple..."
-        },
-        {
-            title: "Instructions",
-            description: "How to set up a Wi-Fi wireless network?"
-        },
-        {
-            title: "Career",
-            description: "How to organize your working day effectively?"
-        },
-
-        {
-            title: "Onboarding",
-            description: "How does artificial intelligence work?"
-        },
-        {
-            title: "Javascript",
-            description: "What is JavaScript?"
-        },
-        
-    ];
-
+const HistoryPanel = ({ history = [], clearHistory }) => {
     return (
-        <div
-            className={`fixed right-0 transform top-0  ${
-                isOpen ? "translate-x-0" : "translate-x-full"
-            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 md:relative md:translate-x-0 md:flex md:flex-col  min-h-screen `}
-        >
-            <div className="flex justify-between items-center ">
-                <h2 className="text-lg font-semibold  hidden md:block ">
-                    History
-                </h2>
-                <button className="bg-gray-900/50 py-1 px-3 rounded-lg text-[14px] font-semibold">
-                    6/50
-                </button>
+        <div className="fixed top-0 right-0 w-64 bg-gray-800 lg:flex flex-col bottom-0 px-3 hidden  overflow-hidden">
+            <div className="p-4 border-b border-gray-700 ">
+                <div className="flex justify-between items-center mb-[7px]">
+                    <h2 className="text-lg font-semibold text-white">
+                        History
+                    </h2>
+                    <span className="bg-gray-900/50 py-1 px-3 rounded-lg text-[14px] font-semibold text-white">
+                        {history.length || 0}/50
+                    </span>
+                </div>
             </div>
-            <ul className=" flex-1  mt-10">
-                {historyItems.map((item, index) => (
-                    <li
-                        key={index}
-                        className={
-                            index === 0
-                                ? "bg-gray-700 p-2 rounded-lg"
-                                : "p-2 rounded-lg"
-                        }
-                    >
-                        <h3 className="font-medium">{item.title}</h3>
-                        <p className="text-sm text-gray-400">
-                            {item.description}
-                        </p>
-                    </li>
-                ))}
-                <button className="bg-gray-900  px-8 py-3 rounded-lg  mt-5 ml-2 flex gap-5 items-center  text-sm ">
-                    <Trash2 className="w-5 h-5 hover:text-red-500 duration-300" />
+
+            <div className="flex-1 overflow-y-auto p-4 history-list max-h-[76vh] mt-1">
+                <ul className="space-y-4">
+                    {(history || []).map((item, index) => (
+                        <li
+                            key={index}
+                            className={`p-2 rounded-lg ${
+                                index === 0 ? "bg-gray-700" : ""
+                            }`}
+                        >
+                            <h3 className="font-medium text-white">
+                                {item.title}
+                            </h3>
+                            <p className="text-sm text-gray-400">
+                                {item.description}
+                            </p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className=" border-t border-gray-700 fixed bottom-6 px-3 py-2 ">
+                <button
+                    onClick={clearHistory}
+                    className="bg-gray-900 hover:bg-red-700 text-white font-bold py-2 px-10  rounded flex items-center justify-center transition-colors duration-300  w-full "
+                    disabled={history.length === 0}
+                >
+                    <Trash2 className="w-5 h-5 mr-2" />
                     Clear history
                 </button>
-            </ul>
+            </div>
         </div>
     );
 };
+
 export default HistoryPanel;

@@ -8,7 +8,7 @@ const Header = ({ onMenuClick, onHistoryClick }) => {
                     <Menu className="w-6 h-6" />
                 </button>
                 <h1 className="text-md md:text-xl font-bold">
-                    Smart Response Assistant
+                    Celestia Knowledge Companion
                 </h1>
             </div>
             <div className="flex items-center space-x-4 lg:mr-[17rem]">

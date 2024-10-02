@@ -25,7 +25,7 @@ const ChatArea = () => {
 
         try {
             const response = await fetch(
-                "https://quirkle-server.vercel.app/api/chat",
+                "https://celestia-server-sepia.vercel.app/api/chat",
                 {
                     method: "POST",
                     headers: {

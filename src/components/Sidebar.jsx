@@ -1,6 +1,4 @@
 import {
-    FileCode2,
-    BarChart2,
     Settings,
     HelpCircle,
     X,
@@ -8,7 +6,9 @@ import {
     Sparkles,
     User,
     LifeBuoy,
-    Link
+    Link,
+    Grid,
+    FileText
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                         <Sparkles className="w-5 h-5" />
                     </a>
                     <a href="/" className="text-xl font-bold">
-                        Quirkle
+                        Celestia
                     </a>
                 </div>
 
@@ -39,21 +39,15 @@ const Sidebar = ({ isOpen, onClose }) => {
             <nav className="flex-1">
                 <ul className="space-y-2">
                     <li>
-                        <a href="/template" className="flex items-center p-2">
-                            <FileCode2 className="w-5 h-5 mr-3" />
-                            Templates
-                            <span className="ml-auto text-xs bg-indigo-600 px-2 py-1 rounded">
-                                Pro
-                            </span>
+                        <a href="/" className="flex items-center p-2">
+                            <Grid className="w-5 h-5 mr-3" />
+                            Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="/statistics" className="flex items-center p-2">
-                            <BarChart2 className="w-5 h-5 mr-3" />
-                            Statistics
-                            <span className="ml-auto text-xs bg-indigo-600 px-2 py-1 rounded">
-                                Pro
-                            </span>
+                        <a href="/reports" className="flex items-center p-2">
+                            <FileText className="w-5 h-5 mr-3" />
+                            Reports
                         </a>
                     </li>
                     <li>

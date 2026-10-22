@@ -1,115 +1,137 @@
 import {
-    Settings,
-    HelpCircle,
-    X,
     Bell,
-    Sparkles,
-    User,
+    FileText,
+    Grid,
+    HelpCircle,
     LifeBuoy,
     Link,
-    Grid,
-    FileText
+    MessageSquare,
+    Settings,
+    Sparkles,
+    ShieldCheck,
+    User,
+    X
 } from "lucide-react";
 
-const Sidebar = ({ isOpen, onClose }) => {
+const NAV_ITEMS = [
+    { id: "chat", label: "New chat", icon: MessageSquare },
+    { id: "dashboard", label: "Dashboard", icon: Grid },
+    { id: "reports", label: "Reports", icon: FileText },
+    { id: "settings", label: "Settings", icon: Settings },
+    { id: "notifications", label: "Notifications", icon: Bell },
+    { id: "faq", label: "Updates & FAQ", icon: HelpCircle },
+    { id: "support", label: "Support", icon: LifeBuoy },
+    { id: "integrations", label: "Integrations", icon: Link },
+    { id: "account", label: "Account", icon: User }
+];
+
+const Sidebar = ({
+    isOpen,
+    activeView,
+    userRole,
+    onClose,
+    onNavigate,
+    onNewChat
+}) => {
+    const navigationItems =
+        userRole === "admin"
+            ? [
+                  { id: "admin", label: "Admin Dashboard", icon: ShieldCheck },
+                  ...NAV_ITEMS
+              ]
+            : NAV_ITEMS;
+
     return (
-        <div
-            className={`fixed inset-y-0 left-0 transform ${
-                isOpen ? "translate-x-0" : "-translate-x-full"
-            } w-64 bg-gray-800 p-4 transition-transform duration-300 ease-in-out z-20 lg:relative lg:translate-x-0`}
-        >
-            <div className="flex items-center justify-between mb-5 border-b border-gray-700 ">
-                <div className="flex items-center mb-5 ">
-                    <a
-                        href="/"
-                        className="w-8 h-8 bg-indigo-600 rounded-lg mr-2 flex items-center justify-center"
+        <>
+            {isOpen && (
+                <button
+                    type="button"
+                    aria-label="Close navigation menu"
+                    onClick={onClose}
+                    className="fixed inset-0 z-30 bg-black/60 lg:hidden"
+                />
+            )}
+            <aside
+                className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col bg-gray-800 p-4 transition-transform duration-300 lg:static lg:translate-x-0 ${
+                    isOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
+            >
+                <div className="mb-5 flex items-center justify-between border-b border-gray-700 pb-4">
+                    <button
+                        type="button"
+                        onClick={onNewChat}
+                        className="flex items-center gap-2 text-left"
                     >
-                        <Sparkles className="w-5 h-5" />
-                    </a>
-                    <a href="/" className="text-xl font-bold">
-                        Celestia
-                    </a>
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600">
+                            <Sparkles className="h-5 w-5" />
+                        </span>
+                        <span className="text-xl font-bold">Celestia</span>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="rounded p-1 text-gray-400 hover:bg-gray-700 hover:text-white lg:hidden"
+                        aria-label="Close menu"
+                    >
+                        <X className="h-5 w-5" />
+                    </button>
                 </div>
 
-                <button onClick={onClose} className="lg:hidden">
-                    <X className="w-6 h-6" />
-                </button>
-            </div>
+                <nav className="flex-1 overflow-y-auto" aria-label="Main navigation">
+                    <ul className="space-y-1">
+                        {navigationItems.map(({ id, label, icon: Icon }) => (
+                            <li key={id}>
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        id === "chat"
+                                            ? onNewChat()
+                                            : onNavigate(id)
+                                    }
+                                    aria-current={
+                                        activeView === id ? "page" : undefined
+                                    }
+                                    className={`flex w-full items-center rounded-lg p-2 text-left transition-colors ${
+                                        activeView === id
+                                            ? "bg-indigo-600 text-white"
+                                            : "text-gray-200 hover:bg-gray-700"
+                                    }`}
+                                >
+                                    <Icon className="mr-3 h-5 w-5" />
+                                    {label}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
-            <nav className="flex-1">
-                <ul className="space-y-2">
-                    <li>
-                        <a href="/" className="flex items-center p-2">
-                            <Grid className="w-5 h-5 mr-3" />
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/reports" className="flex items-center p-2">
-                            <FileText className="w-5 h-5 mr-3" />
-                            Reports
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/settings" className="flex items-center p-2">
-                            <Settings className="w-5 h-5 mr-3" />
-                            Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/notifications"
-                            className="flex items-center p-2"
-                        >
-                            <Bell className="w-5 h-5 mr-3" />
-                            Notifications
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/faq" className="flex items-center p-2">
-                            <HelpCircle className="w-5 h-5 mr-3" />
-                            Updates & FAQ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/support" className="flex items-center p-2">
-                            <LifeBuoy className="w-5 h-5 mr-3" />
-                            Support
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/integrations"
-                            className="flex items-center p-2"
-                        >
-                            <Link className="w-5 h-5 mr-3" />
-                            Integrations
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/account" className="flex items-center p-2">
-                            <User className="w-5 h-5 mr-3" />
-                            Account
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div className="mt-3">
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg p-4">
-                    <h3 className="font-bold mb-2">Premium Plan</h3>
-                    <p className="text-sm mb-4">
-                        Unlock advanced features: elevate your experience!
+                <div className="mt-4 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 p-4">
+                    <h2 className="mb-2 font-bold">
+                        {userRole === "admin"
+                            ? "Administrator"
+                            : "Knowledge workspace"}
+                    </h2>
+                    <p className="mb-3 text-sm text-indigo-50">
+                        {userRole === "admin"
+                            ? "Manage the Celestia workspace."
+                            : "Sign in to save conversations to your account."}
                     </p>
-                    <div className="flex justify-between items-center">
-                        <span className="font-bold">$15 / mo</span>
-                        <button className="px-4 py-1 bg-white text-indigo-600 rounded-md text-sm font-medium">
-                            Upgrade Now
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        onClick={() =>
+                            onNavigate(
+                                userRole === "admin" ? "admin" : "account"
+                            )
+                        }
+                        className="rounded-md bg-white px-3 py-1.5 text-sm font-semibold text-indigo-700 hover:bg-indigo-50"
+                    >
+                        {userRole === "admin"
+                            ? "Admin dashboard"
+                            : "Account details"}
+                    </button>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </>
     );
 };
 

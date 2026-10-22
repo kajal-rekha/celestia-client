@@ -1,36 +1,54 @@
-import { Menu, Clock, User, Sun } from "lucide-react";
+import { Clock, Menu, MessageSquarePlus, User } from "lucide-react";
 
-const Header = ({ onMenuClick, onHistoryClick }) => {
+const Header = ({
+    title,
+    onMenuClick,
+    onHistoryClick,
+    onNewChat,
+    onAccountClick
+}) => {
     return (
-        <header className="flex items-center justify-between p-5 border-b border-gray-700">
-            <div className="flex items-center">
-                <button onClick={onMenuClick} className="mr-4 lg:hidden">
-                    <Menu className="w-6 h-6" />
+        <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-gray-700 bg-gray-900 px-4 sm:px-6">
+            <div className="flex min-w-0 items-center">
+                <button
+                    type="button"
+                    onClick={onMenuClick}
+                    className="mr-3 rounded p-1 text-gray-300 hover:bg-gray-800 lg:hidden"
+                    aria-label="Open navigation menu"
+                >
+                    <Menu className="h-6 w-6" />
                 </button>
-                <h1 className="text-md md:text-xl font-bold">
-                    Celestia Knowledge Companion
+                <h1 className="truncate text-base font-bold sm:text-xl">
+                    {title}
                 </h1>
             </div>
-            <div className="flex items-center space-x-4 lg:mr-[17rem]">
+            <div className="ml-3 flex shrink-0 items-center gap-2 sm:gap-4">
                 <button
-                    className="text-gray-400 hover:text-white transition-colors"
-                    aria-label="User profile"
+                    type="button"
+                    onClick={onNewChat}
+                    className="rounded p-2 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
+                    aria-label="Start a new chat"
+                    title="New chat"
                 >
-                    <User className="w-6 h-6" />
+                    <MessageSquarePlus className="h-5 w-5" />
                 </button>
                 <button
-                    className="text-gray-400 hover:text-white transition-colors"
-                    aria-label="Toggle theme"
+                    type="button"
+                    onClick={onAccountClick}
+                    className="rounded p-2 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
+                    aria-label="Open account"
+                    title="Account"
                 >
-                    <Sun className="w-6 h-6" />
+                    <User className="h-5 w-5" />
                 </button>
-
                 <button
+                    type="button"
                     onClick={onHistoryClick}
-                    className=" text-gray-400 hover:text-white transition-colors"
-                    aria-label="View history"
+                    className="rounded p-2 text-gray-400 transition-colors hover:bg-gray-800 hover:text-white lg:hidden"
+                    aria-label="View chat history"
+                    title="Chat history"
                 >
-                    <Clock className="w-6 h-6" />
+                    <Clock className="h-5 w-5" />
                 </button>
             </div>
         </header>
